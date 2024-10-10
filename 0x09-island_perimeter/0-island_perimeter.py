@@ -1,38 +1,23 @@
 #!/usr/bin/python3
 """
-This module contains the function island_perimeter that calculates
-the perimeter of an island represented in a grid.
+This module contains a function that returns the perimeter of an island
+described in grid
 """
 
+
 def island_perimeter(grid):
-    """
-    Calculate the perimeter of an island described in a grid.
-    
-    Args:
-        grid (list of list of int): The grid representing the island and water.
-        
-    Returns:
-        int: The perimeter of the island.
-    """
-    rows = len(grid)
-    cols = len(grid[0])
+    """this function returns the perimeter of an island described by grid"""
     perimeter = 0
-
-    for i in range(rows):
-        for j in range(cols):
-            if grid[i][j] == 1:
-                # Start with 4 sides
-                perimeter += 4
-
-                # Subtract sides for adjacent land cells
-                if i > 0 and grid[i - 1][j] == 1:  # Check cell above
-                    perimeter -= 1
-                if i < rows - 1 and grid[i + 1][j] == 1:  # Check cell below
-                    perimeter -= 1
-                if j > 0 and grid[i][j - 1] == 1:  # Check cell to the left
-                    perimeter -= 1
-                if j < cols - 1 and grid[i][j + 1] == 1:  # Check cell to the right
-                    perimeter -= 1
-
+    grid_len = len(grid)
+    for row in range(grid_len):
+        for col in range(len(grid[row])):
+            if grid[row][col] == 1:
+                if row - 1 < 0 or grid[row - 1][col] == 0:
+                    perimeter += 1
+                if col - 1 < 0 or grid[row][col - 1] == 0:
+                    perimeter += 1
+                if col + 1 >= len(grid[row]) or grid[row][col + 1] == 0:
+                    perimeter += 1
+                if row + 1 >= grid_len or grid[row + 1][col] == 0:
+                    perimeter += 1
     return perimeter
-
